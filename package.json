@@ -1,0 +1,33 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tushar-3154/namaste-react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tushar-3154/namaste-react/issues"
+  },
+  "homepage": "https://github.com/tushar-3154/namaste-react#readme",
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.3.0"
+  },
+  "devDependencies": {
+    "@parcel/transformer-react-refresh-wrap": "^2.14.1",
+    "parcel": "^2.14.1",
+    "process": "^0.11.10"
+  },
+  "browserlist": [
+    "last 2 versions"
+  ]
+}
