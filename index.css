@@ -1,37 +1,46 @@
 .header {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   border: 1px solid black;
+  padding: 10px;
 }
 
 .logo {
-  width: 200px;
+  width: 150px;
+  max-width: 30vw;
 }
 
 .nav-items {
-  padding: 0px 150px;
+  padding: 0 5vw;
 }
 
 .nav-items > ul {
-  font-size: 24px;
+  font-size: 1.2rem;
   display: flex;
+  flex-wrap: wrap;
   list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-items > ul > li {
   padding: 10px;
-  margin: 10px;
-}
-
-.res-card {
-  margin: 10px;
-  width: 200px;
-  padding: 5px;
+  margin: 5px;
 }
 
 .res-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.res-card {
+  margin: 10px;
+  width: 100%;
+  max-width: 250px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .res-card:hover {
@@ -41,9 +50,126 @@
 
 .search {
   padding: 10px;
+  width: 100%;
+  margin: auto;
 }
 
 .res-logo {
   width: 100%;
-  height: 35%;
+  height: 30%;
 }
+
+.filter-btn {
+  margin: 10px;
+  cursor: pointer;
+}
+
+/* .search {
+  margin: 5px;
+  cursor: pointer;
+} */
+
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shimmer-card {
+  margin: 20px;
+  width: 200px;
+  height: 400px;
+  background-color: #f0f0f0;
+}
+
+.login {
+  padding: 0 20px;
+  cursor: pointer;
+}
+
+.filter {
+  display: flex;
+}
+
+.res-head {
+  margin: 30px;
+}
+
+.res-head > h4 {
+  font-size: 30px;
+}
+
+.res-items-cards {
+  border-radius: 10px;
+  margin: 10px;
+  height: 450px;
+  width: 100%;
+  max-width: 250px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.res-items-logo {
+  border-radius: 30px;
+  height: 150px;
+  width: 220px;
+}
+
+.start-logo {
+  height: 24px;
+  width: 24px;
+}
+
+.start-div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.separator {
+  width: 100%;
+  border: none;
+  border-top: 2px solid #ccc;
+  margin: 30px 0px;
+}
+
+.res-items {
+  display: flex; /* Ensures items are in a row */
+  gap: 10px; /* Adds spacing between items */
+  overflow-x: auto; /* Enables horizontal scrolling */
+  white-space: nowrap; /* Prevents wrapping to the next line */
+  padding: 10px;
+  border: 1px solid #ccc; /* Optional: for visualization */
+  scrollbar-width: thin; /* Firefox: makes scrollbar thinner */
+  scrollbar-color: #888 #f1f1f1; /* Firefox: scrollbar color */
+}
+
+/* For Webkit Browsers (Chrome, Edge, Safari) */
+.res-items::-webkit-scrollbar {
+  height: 8px; /* Horizontal scrollbar height */
+}
+
+.res-items::-webkit-scrollbar-thumb {
+  background-color: #888; /* Scrollbar color */
+  border-radius: 4px;
+}
+
+/* 📱 Mobile responsiveness */
+/* @media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .nav-items {
+    padding: 10px 0;
+  }
+
+  .nav-items > ul {
+    flex-direction: column;
+  }
+
+  .res-card {
+    max-width: 90%;
+  }
+} */
