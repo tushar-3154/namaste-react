@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import { RestaurantItems, RestauratHeader } from "./Res-items";
-import RestauratCard from "./RestaurantCard";
+import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 
+
 const Body = () => {
+
+    // console.log("RestauratCard", RestaurantCard);
 
     // Local state Variable - Super powerful variable
     const [listOfRestaurant, setListOfRestaurant] = useState([]);
@@ -20,13 +24,16 @@ const Body = () => {
 
     const fetchData = async () => {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.6708317&lng=71.5723953&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+
+        console.log(data);
+
         const json = await data.json();
 
         console.log("card data", json.data.cards);
-        //Optinal chaining
-        setListOfRestaurant(json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 
-        setFilterRestaurant(json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setListOfRestaurant(json?.data?.cards[0].card?.card?.gridElements?.infoWithStyle?.restaurants);
+
+        setFilterRestaurant(json?.data?.cards[0].card?.card?.gridElements?.infoWithStyle?.restaurants);
 
         setResItems(json?.data?.cards[0]?.card?.card?.header?.title);
 
@@ -93,7 +100,8 @@ const Body = () => {
             <div className="res-container">
                 {
                     filterRestaurant.map((restaurant) => (
-                        <RestauratCard key={restaurant.info.id} resData={restaurant} />
+                        <Link to={"/restaurant/" + restaurant.info.id}>
+                            <RestaurantCard key={restaurant.info.id} resData={restaurant} /></Link>
                     ))
                 }
             </div>
