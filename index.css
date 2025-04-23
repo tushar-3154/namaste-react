@@ -1,3 +1,4 @@
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -6,7 +7,9 @@
   border: 1px solid black;
   padding: 10px;
   gap: 10px;
-  width: 1500px;
+  /* width: 1500px; */
+  width: 100%;
+  max-width: 1500px;
 }
 
 .logo {
@@ -47,6 +50,17 @@
   box-sizing: border-box;
 }
 
+.res-container a{
+  text-decoration: none;
+  color: black;
+}
+
+.res-card > * 
+{
+  text-decoration: none;
+  color: black;
+}
+
 .res-card:hover {
   cursor: pointer;
   border: 1px solid black;
@@ -79,11 +93,20 @@
 }
 
 .shimmer-card {
-  margin: 20px;
-  width: 200px;
-  height: 400px;
-  background-color: #f0f0f0;
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(to right, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
+  background-size: 200% 100%;
 }
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 
 .login {
   padding: 0 20px;
@@ -137,43 +160,114 @@
 }
 
 .res-items {
-  display: flex; /* Ensures items are in a row */
-  gap: 10px; /* Adds spacing between items */
-  overflow-x: auto; /* Enables horizontal scrolling */
-  white-space: nowrap; /* Prevents wrapping to the next line */
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
   padding: 10px;
-  border: 1px solid #ccc; /* Optional: for visualization */
-  scrollbar-width: thin; /* Firefox: makes scrollbar thinner */
-  scrollbar-color: #888 #f1f1f1; /* Firefox: scrollbar color */
+  border: 1px solid #ccc; 
+  scrollbar-width: thin; 
+  scrollbar-color: #888 #f1f1f1;
 }
 
-/* For Webkit Browsers (Chrome, Edge, Safari) */
 .res-items::-webkit-scrollbar {
-  height: 8px; /* Horizontal scrollbar height */
+  height: 8px;
 }
 
 .res-items::-webkit-scrollbar-thumb {
-  background-color: #888; /* Scrollbar color */
+  background-color: #888;
   border-radius: 4px;
 }
 
-/* 📱 Mobile responsiveness */
-/* @media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+.user-card{
+  padding: 10px;
+  border: 1px solid black;
+}
 
-  .nav-items {
-    padding: 10px 0;
-  }
+.about{
+  width: 100%;;
+}
 
-  .nav-items > ul {
-    flex-direction: column;
-  }
 
-  .res-card {
-    max-width: 90%;
-  }
-} */
+.title {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  width: 30vw;
+  background-color: rgb(190, 164, 214);
+  padding: 2vw 1vw;
+  border-radius: 10px 10px 0 0;
+  font-size: 2rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 30vw;
+  padding: 2vw 1vw;
+  background-color: rgb(250, 194, 194);
+  border-radius: 0 0 10px 10px;
+}
+
+input {
+  border: 1px solid rgb(172, 171, 171);
+  border-radius: 10px;
+  padding: 1vw 1vw;
+  outline: none;
+  margin: 5px;
+}
+
+
+.login-container {
+  width: 350px;
+  margin: 80px auto;
+  padding:30px 50px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  text-align: center;
+}
+
+/* Title */
+.login-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Form */
+.login-form input {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.login-form input:focus {
+  border-color: #7dcfff;
+  box-shadow: 0 0 0 2px rgba(125, 207, 255, 0.2);
+}
+
+/* Button */
+.login-form button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background-color: #7dcfff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: #4bb5ff;
+}

@@ -1,15 +1,16 @@
+import Button from '@mui/material/Button';
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
+import useBody from "../utils/useBody";
+import useOnlineStatus from "../utils/useOnlineStatus";
 import { RestaurantItems, RestauratHeader } from "./Res-items";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 
 
+
 const Body = () => {
 
-    // console.log("RestauratCard", RestaurantCard);
-
-    // Local state Variable - Super powerful variable
     const [listOfRestaurant, setListOfRestaurant] = useState([]);
 
     const [filterRestaurant, setFilterRestaurant] = useState([]);
@@ -18,30 +19,22 @@ const Body = () => {
 
     const [searchText, setSearchText] = useState();
 
+    const {restaurants, headerTitle} = useBody();
+
+
     useEffect(() => {
-        fetchData();
-    }, []);
+        setListOfRestaurant(restaurants);
+        setFilterRestaurant(restaurants);
+    }, [restaurants]);
+    
 
-    const fetchData = async () => {
-        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.6708317&lng=71.5723953&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+    const onlineStatus = useOnlineStatus();
 
-        console.log(data);
+    if(onlineStatus === false){
+        return <h1>looks like youre offline!! please check your internet connection</h1>
 
-        const json = await data.json();
+    }
 
-        console.log("card data", json.data.cards);
-
-        setListOfRestaurant(json?.data?.cards[0].card?.card?.gridElements?.infoWithStyle?.restaurants);
-
-        setFilterRestaurant(json?.data?.cards[0].card?.card?.gridElements?.infoWithStyle?.restaurants);
-
-        setResItems(json?.data?.cards[0]?.card?.card?.header?.title);
-
-
-    };
-
-
-    //Condinitional rendering
     if (listOfRestaurant.length === 0) {
         return <Shimmer />
     }
@@ -55,7 +48,7 @@ const Body = () => {
                     setSearchText(e.target.value)
                 }} />
 
-                <button onClick={() => {
+                <Button  variant="contained" onClick={() => {
 
                     const filterRes = listOfRestaurant.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase())
                     );
@@ -65,11 +58,11 @@ const Body = () => {
 
                     console.log("filterRes", filterRes);
 
-                }}>Search</button>
+                }}>Search</Button>
             </div>
 
             <div className="filter">
-                <button className="filter-btn" onClick={() => {
+                <Button  variant="outlined" className="filter-btn" onClick={() => {
 
                     const filteredList = listOfRestaurant.filter((res) => res.info.avgRating > 4)
 
@@ -78,7 +71,7 @@ const Body = () => {
 
                 }}>
                     Top rated Restaurant
-                </button>
+                </Button>
             </div>
 
             <div className="res-header">
@@ -100,7 +93,7 @@ const Body = () => {
             <div className="res-container">
                 {
                     filterRestaurant.map((restaurant) => (
-                        <Link to={"/restaurant/" + restaurant.info.id}>
+                        <Link to={"/restaurant/" + restaurant.info.id} key={restaurant?.info?.id}>
                             <RestaurantCard key={restaurant.info.id} resData={restaurant} /></Link>
                     ))
                 }
