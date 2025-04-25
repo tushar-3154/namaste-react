@@ -31,12 +31,12 @@ const Header = () => {
     }, [btnName]);
 
     return (
-        <div className="header">
+        <div className="flex justify-between bg-pink-100 shadow-lg sm:bg-yellow-50 lg:bg-green-50">
             <div className="logo-container">
-                <img className="logo" src={LOGO_URL}></img>
+                <img className="w-53" src={LOGO_URL}></img>
             </div>
-            <div className="nav-items">
-                <ul>
+            <div className="flex items-center">
+                <ul className="flex p-4 m-4 gap-9">
                     <li>
                         Online Status :{onlineStatus ? "✅" : "🔴"}
                     </li>

@@ -1,4 +1,3 @@
-import Button from '@mui/material/Button';
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import useBody from "../utils/useBody";
@@ -19,18 +18,18 @@ const Body = () => {
 
     const [searchText, setSearchText] = useState();
 
-    const {restaurants, headerTitle} = useBody();
+    const { restaurants, headerTitle } = useBody();
 
 
     useEffect(() => {
         setListOfRestaurant(restaurants);
         setFilterRestaurant(restaurants);
     }, [restaurants]);
-    
+
 
     const onlineStatus = useOnlineStatus();
 
-    if(onlineStatus === false){
+    if (onlineStatus === false) {
         return <h1>looks like youre offline!! please check your internet connection</h1>
 
     }
@@ -42,27 +41,26 @@ const Body = () => {
     return listOfRestaurant.length === 0 ? <Shimmer /> : (
         <div className="body">
 
+            <div className="filter flex">
+                <div className="search p-4 m-4">
+                    <input type="text" className="border border-solid border-black" value={searchText} onChange={(e) => {
+                        setSearchText(e.target.value)
+                    }} />
 
-            <div className="search">
-                <input type="text" className="search-box" value={searchText} onChange={(e) => {
-                    setSearchText(e.target.value)
-                }} />
+                    <button className='px-4 py-1 bg-green-100 m-4 rounded-lg' onClick={() => {
 
-                <Button  variant="contained" onClick={() => {
+                        const filterRes = listOfRestaurant.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase())
+                        );
+                        setFilterRestaurant(filterRes)
 
-                    const filterRes = listOfRestaurant.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase())
-                    );
-                    setFilterRestaurant(filterRes)
+                        console.log(filterRestaurant);
+                        console.log("filterRes", filterRes);
 
-                    console.log(filterRestaurant);
+                    }}>Search</button>
+                </div>
 
-                    console.log("filterRes", filterRes);
-
-                }}>Search</Button>
-            </div>
-
-            <div className="filter">
-                <Button  variant="outlined" className="filter-btn" onClick={() => {
+            <div className="search p-4 m-4 flex items-center">
+                <button className="px-4 py-2 bg-gray-100 rounded-lg" onClick={() => {
 
                     const filteredList = listOfRestaurant.filter((res) => res.info.avgRating > 4)
 
@@ -71,15 +69,17 @@ const Body = () => {
 
                 }}>
                     Top rated Restaurant
-                </Button>
+                </button>
             </div>
+            </div>
+
 
             <div className="res-header">
                 <RestauratHeader title={resItems} />
             </div>
 
 
-            <div className="res-items">
+            <div className="flex overflow-y-scroll">
                 {
                     filterRestaurant.map((restaurant) => (
                         <RestaurantItems key={restaurant.info.id} resData={restaurant} />
@@ -90,7 +90,7 @@ const Body = () => {
             <hr className="separator"></hr>
 
 
-            <div className="res-container">
+            <div className="flex flex-wrap">
                 {
                     filterRestaurant.map((restaurant) => (
                         <Link to={"/restaurant/" + restaurant.info.id} key={restaurant?.info?.id}>
