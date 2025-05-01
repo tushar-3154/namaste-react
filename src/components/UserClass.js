@@ -10,28 +10,28 @@ class UserClass extends React.Component{
           }
 
         }
-        console.log(this.props.name+"child constructor");
+        // console.log(this.props.name+"child constructor");
     }
 
    async componentDidMount(){
     const data = await fetch("https://api.github.com/users/tushar-3154");
     const json = await data.json();
         
-        console.log("json data",json);
+        // console.log("json data",json);
 
         this.setState({
             userInfo: json,
         });
 
-        console.log(json);
+        // console.log(json);
     }
 
     componentDidUpdate(){
-        console.log("Component did update");
+        // console.log("Component did update");
     }
     
     componentWillUnmount(){
-        console.log("Component Will Unmount");
+        // console.log("Component Will Unmount");
     }
     render(){
         // console.log('child render');
@@ -46,7 +46,7 @@ class UserClass extends React.Component{
             <img src={avatar_url}></img>
             <h1>Name: {name}</h1>
             <h2>Location: {location}</h2>
-            <h3>Contact: @tushar31</h3>
+            <h3 >Contact: @tushar31</h3>
             </div>
         )
     }

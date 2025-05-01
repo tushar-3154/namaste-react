@@ -1,4 +1,5 @@
 import React from 'react';
+import UserContext from '../utils/UserContext';
 import User from './User';
 
 class About extends React.Component{
@@ -18,13 +19,22 @@ class About extends React.Component{
         // console.log('parent component did mount');
     }
     render(){
-        // console.log("parent Render");
-        // const {name,location}= this.state;
         return(
             <div className='about'>
                 <h1>About</h1>
                 <h2>this is namaste react web series</h2>
                 <User name={"Tushar"} location={"Botad"}/>
+
+                <div>
+                    UserLoggedIn: <UserContext.Consumer>
+                        {(data)=> {
+                            return(
+                                <h1 className="text-2xl font-bold">{data.loggedIn}</h1>
+                            )
+                        }
+                    }
+                    </UserContext.Consumer>
+                </div>
             </div>
         )
     }

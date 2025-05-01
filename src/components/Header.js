@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LOGO_URL } from "../utils/constants";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
 
     const [btnName, setbtnName] = useState("Login");
     const onlineStatus = useOnlineStatus();
     const navigate = useNavigate();
+
+    const {loggedIn} = useContext(UserContext);
 
     const handleClick = ()=>{
         if(btnName === "Login"){
@@ -20,7 +23,7 @@ const Header = () => {
         }
     }
 
-    console.log("Header render");
+    // console.log("Header render");
 
     //if no dependency array => useEffect is called on every render
     //if dependency array is empty = [] => useEffect is called on intial render(just once)
@@ -54,6 +57,8 @@ const Header = () => {
                     </li>
                     <li>Cart</li>
                     <button className="login" onClick={handleClick}> {btnName}</button>
+                    <li>{loggedIn}</li>
+
                 </ul>
             </div>
         </div>

@@ -5,17 +5,17 @@ const User = (props)=>{
 
     useEffect(()=>{
         setInterval(()=>{
-            console.log("Namaste React Op");
+            // console.log("Namaste React Op");
         },1000)
-        console.log("useEffect");
+        // console.log("useEffect");
 
         return()=>{
-            console.log("useEffect Return");
+            // console.log("useEffect Return");
         }
     },[]);
     // const [count2] = useState(1);
 
-    console.log("render");
+    // console.log("render");
     return(
         <div className="user-card m-4 p-4 bg-gray-50 rounded-lg">
             <h1>Count = {count}</h1>

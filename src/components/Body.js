@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import useBody from "../utils/useBody";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { RestaurantItems, RestauratHeader } from "./Res-items";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromtedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 
 
@@ -19,6 +19,10 @@ const Body = () => {
     const [searchText, setSearchText] = useState();
 
     const { restaurants, headerTitle } = useBody();
+
+    const RestaurantCardPromted = withPromtedLabel(RestaurantCard);
+
+
 
 
     useEffect(() => {
@@ -53,8 +57,8 @@ const Body = () => {
                         );
                         setFilterRestaurant(filterRes)
 
-                        console.log(filterRestaurant);
-                        console.log("filterRes", filterRes);
+                        // console.log(filterRestaurant);
+                        // console.log("filterRes", filterRes);
 
                     }}>Search</button>
                 </div>
@@ -89,12 +93,14 @@ const Body = () => {
 
             <hr className="separator"></hr>
 
-
             <div className="flex flex-wrap">
                 {
                     filterRestaurant.map((restaurant) => (
                         <Link to={"/restaurant/" + restaurant.info.id} key={restaurant?.info?.id}>
-                            <RestaurantCard key={restaurant.info.id} resData={restaurant} /></Link>
+                            {
+                                restaurant.info.promoted ? <RestaurantCardPromted redData={restaurant} /> :  <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+                            }
+                           </Link>
                     ))
                 }
             </div>
