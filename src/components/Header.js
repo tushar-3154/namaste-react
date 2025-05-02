@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { LOGO_URL } from "../utils/constants";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -10,14 +11,17 @@ const Header = () => {
     const onlineStatus = useOnlineStatus();
     const navigate = useNavigate();
 
-    const {loggedIn} = useContext(UserContext);
+    const { loggedIn } = useContext(UserContext);
 
-    const handleClick = ()=>{
-        if(btnName === "Login"){
+    //subscribing to the store using a selector
+    const cartItems = useSelector((store) => store.cart.items);
+
+    const handleClick = () => {
+        if (btnName === "Login") {
             setbtnName("Logout");
             navigate("/login")
         }
-        else{
+        else {
             setbtnName("Login");
             navigate("/")
         }
@@ -55,9 +59,11 @@ const Header = () => {
                     <li>
                         <Link to="/grocery">Grocery</Link>
                     </li>
-                    <li>Cart</li>
+                    <li className="font-bold text-xl"><Link to="/cart">Cart- ({cartItems.length} items)</Link></li>
                     <button className="login" onClick={handleClick}> {btnName}</button>
-                    <li>{loggedIn}</li>
+                    <li>
+                        {loggedIn}
+                    </li>
 
                 </ul>
             </div>

@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import useBody from "../utils/useBody";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 import { RestaurantItems, RestauratHeader } from "./Res-items";
 import RestaurantCard, { withPromtedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
@@ -38,6 +39,8 @@ const Body = () => {
 
     }
 
+    const { loggedIn, setUserName } = useContext(UserContext);
+
     if (listOfRestaurant.length === 0) {
         return <Shimmer />
     }
@@ -57,24 +60,27 @@ const Body = () => {
                         );
                         setFilterRestaurant(filterRes)
 
-                        // console.log(filterRestaurant);
-                        // console.log("filterRes", filterRes);
-
                     }}>Search</button>
                 </div>
 
-            <div className="search p-4 m-4 flex items-center">
-                <button className="px-4 py-2 bg-gray-100 rounded-lg" onClick={() => {
+                <div className="search p-4 m-4 flex items-center">
+                    <button className="px-4 py-2 bg-gray-100 rounded-lg" onClick={() => {
 
-                    const filteredList = listOfRestaurant.filter((res) => res.info.avgRating > 4)
+                        const filteredList = listOfRestaurant.filter((res) => res.info.avgRating > 4)
 
-                    setListOfRestaurant(filteredList);
+                        setListOfRestaurant(filteredList);
 
 
-                }}>
-                    Top rated Restaurant
-                </button>
-            </div>
+                    }}>
+                        Top rated Restaurant
+                    </button>
+                </div>
+
+                <div className="search p-4 m-4 flex items-center">
+                    <label className="p-2">User Name :</label>
+                    <input className="border border-black p-2" value={loggedIn}
+                     onChange={(e) => setUserName(e.target.value)} />
+                </div>
             </div>
 
 
@@ -98,9 +104,9 @@ const Body = () => {
                     filterRestaurant.map((restaurant) => (
                         <Link to={"/restaurant/" + restaurant.info.id} key={restaurant?.info?.id}>
                             {
-                                restaurant.info.promoted ? <RestaurantCardPromted redData={restaurant} /> :  <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+                                restaurant.info.promoted ? <RestaurantCardPromted redData={restaurant} /> : <RestaurantCard key={restaurant.info.id} resData={restaurant} />
                             }
-                           </Link>
+                        </Link>
                     ))
                 }
             </div>

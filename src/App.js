@@ -5,11 +5,13 @@ import Body from "./components/Body";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 // import Grocery from "./components/Grocery";
+import { Provider } from "react-redux";
+import Cart from "./components/Cart";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utils/UserContext";
-
+import appStore from "./utils/appStore";
 
 
 //chunking
@@ -35,12 +37,14 @@ const AppLayout = () => {
     }, []);
 
     return (
-        <UserContext.Provider value={{loggedIn:userName}}>
-        <div className="app">
-            <Header />
-            <Outlet />
-        </div>
-        </UserContext.Provider>
+        <Provider store={appStore}>
+            <UserContext.Provider value={{ loggedIn: userName, setUserName }}>
+                <div className="app">
+                    <Header />
+                    <Outlet />
+                </div>
+            </UserContext.Provider>
+        </Provider>
     )
 };
 
@@ -71,6 +75,10 @@ const appRouter = createBrowserRouter([
             {
                 path: "/grocery",
                 element: <Suspense fallback={<h1>Loading.......</h1>}> <Grocery /> </Suspense>,
+            },
+            {
+                path: "/cart",
+                element: <Cart />,
             },
             {
                 path: "/restaurant/:resId",
