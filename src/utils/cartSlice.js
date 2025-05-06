@@ -7,6 +7,8 @@ const cartSlice = createSlice({
     },
     reducers: {
         addItem: (state, action) => {
+            //Redux Toolkit uses immer behide
+             
             state.items.push(action.payload);
         },
         removeitems: (state) => {

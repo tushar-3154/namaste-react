@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import useBody from "../utils/useBody";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
-import { RestaurantItems, RestauratHeader } from "./Res-items";
+import { RestaurantHeader, RestaurantItems } from "./Res-items";
 import RestaurantCard, { withPromtedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
-
 
 
 const Body = () => {
@@ -85,11 +84,11 @@ const Body = () => {
 
 
             <div className="res-header">
-                <RestauratHeader title={resItems} />
+                <RestaurantHeader title={resItems} />
             </div>
 
 
-            <div className="flex overflow-y-scroll">
+            <div className="flex overflow-x-scroll">
                 {
                     filterRestaurant.map((restaurant) => (
                         <RestaurantItems key={restaurant.info.id} resData={restaurant} />
